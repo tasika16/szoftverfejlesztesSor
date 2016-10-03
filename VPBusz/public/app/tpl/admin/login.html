@@ -1,0 +1,36 @@
+<section class="forms-basic" ng-controller="LoginController">
+  <div class="page-header">
+    <h1>
+      <i class="md md-input"></i>
+      Admin bejelentkezés
+    </h1>
+    <p class="lead">
+      Kérjük adja meg a belépéshez szükséges adatokat!
+    </p>
+  </div>
+
+  <div class="row m-b-40">
+    <div class="col-md-8">
+      <div class="well white">
+        <form class="form-floating" ng-class="{'has-error': error !== null}" ng-submit="auth()">
+          <fieldset>
+            <div class="form-group">
+              <label for="inputEmail" class="control-label">Email cím</label>
+              <input type="email" class="form-control" ng-model="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="inputPassword" class="control-label">Jelszó</label>
+              <input type="password" class="form-control" id="inputPassword" ng-model="password" required>
+              <div class="help-block has-error error-msg" ng-show="error !== null"><i class="fa fa-warning"></i> {{error}}</div>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Bejelentkezés</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,11 +1,12 @@
 <aside class="sidebar fixed">
   <div class="brand-logo">
     <strong>VPBUSZ</strong>
+    <span ng-show="$root.user"><i class="fa fa-user"></i> {{$root.user.email}} belépett!</span>
   </div>
   
   <ul ng-cloak>
     <a menu-link href="#/dashboard" icon="md md-blur-on">Főoldal</a>
-    <li menu-toggle path="/admin" name="Admin" icon="md md-place">
+    <li menu-toggle path="/admin" name="Admin" icon="md md-place" ng-show="$root.user">
       <a menu-link href="#/admin/stops">Állomások</a>
       <a menu-link href="#/admin/buses">Buszok</a>
       <a menu-link href="#/admin/routes">Útvonalak</a>

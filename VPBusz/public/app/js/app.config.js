@@ -2,6 +2,8 @@
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: '/public/app/tpl/dashboard.html'
+  }).when('/admin', {
+    templateUrl: '/public/app/tpl/admin/login.html'
   }).when('/:folder/:tpl', {
       templateUrl: function(attr){
         return '/public/app/tpl/' + attr.folder + '/' + attr.tpl + '.html';
