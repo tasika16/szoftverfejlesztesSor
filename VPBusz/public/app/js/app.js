@@ -8,10 +8,10 @@ var app = angular.module('materialism', [
   'ngSanitize',
   'ngPlaceholders',
   'ngTable',
+  'ngMap',
 
   'angular-loading-bar',
 
-  'uiGmapgoogle-maps',
   'ui.select',
 
   'mgcrea.ngStrap',

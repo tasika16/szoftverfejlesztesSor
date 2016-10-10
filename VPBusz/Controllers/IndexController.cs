@@ -25,7 +25,6 @@ namespace VPBusz.Controllers
 
         /* 
          * Login
-         * url: /
          * url: /Index/Login
          */
          [HttpPost]
