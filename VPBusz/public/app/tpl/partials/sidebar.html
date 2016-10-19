@@ -7,11 +7,13 @@
   <ul ng-cloak>
     <a menu-link href="#/dashboard" icon="md md-dashboard">Főoldal</a>
     <li menu-toggle path="/admin" name="Admin" icon="md md-place" ng-show="$root.user">
+		<a menu-link href="#/admin/stops" icon="md md-people">Felhasználók</a>
 		<a menu-link href="#/admin/stops" icon="md md-traffic">Megállók</a>
 		<a menu-link href="#/admin/buses" icon="md md-directions-bus">Buszok</a>
 		<a menu-link href="#/admin/routes" icon="md md-swap-horiz">Útvonalak</a>
     </li>
 	<!-- TODO: delete these -->
+	<a menu-link href="#/admin/users" icon="md md-people">Felhasználók</a>
 	<a menu-link href="#/admin/stops" icon="md md-traffic">Megállók</a>
 	<a menu-link href="#/admin/buses" icon="md md-directions-bus">Buszok</a>
 	<a menu-link href="#/admin/routes" icon="md md-swap-horiz">Útvonalak</a>
