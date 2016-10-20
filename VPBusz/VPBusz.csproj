@@ -43,6 +43,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -76,6 +84,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -118,6 +128,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Models\VPBuszModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VPBuszModel.edmx</DependentUpon>
+      <LastGenOutput>VPBuszModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\VPBuszModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VPBuszModel.edmx</DependentUpon>
+      <LastGenOutput>VPBuszModel.cs</LastGenOutput>
+    </Content>
     <Content Include="scripts\ai.0.22.19-build00125.js" />
     <Content Include="scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Web.config" />
@@ -126,8 +146,38 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAL\UserContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Allomasok.cs">
+      <DependentUpon>VPBuszModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Buszok.cs">
+      <DependentUpon>VPBuszModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Felhasznalok.cs">
+      <DependentUpon>VPBuszModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Utvonalak.cs">
+      <DependentUpon>VPBuszModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VPBuszModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VPBuszModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VPBuszModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VPBuszModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VPBuszModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VPBuszModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -140,6 +190,13 @@
     <Content Include="Views\Index\Index.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
+    <EntityDeploy Include="Models\VPBuszModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>VPBuszModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\VPBuszModel.edmx.diagram">
+      <DependentUpon>VPBuszModel.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -149,8 +206,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="public\" />
+    <Folder Include="Views\User\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
