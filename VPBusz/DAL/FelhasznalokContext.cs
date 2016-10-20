@@ -8,13 +8,13 @@ using VPBusz.Models;
 
 namespace VPBusz.DAL
 {
-    public class UserContext:DbContext
+    public class FelhasznalokContext:DbContext
     {
-        public UserContext(): base("UserContext")
+        public FelhasznalokContext(): base("FelhasznalokContext")
         {
             
         }
-        public DbSet<User> User { get; set; }
+        public DbSet<Felhasznalok> Felhasznalok { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

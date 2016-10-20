@@ -147,7 +147,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="DAL\UserContext.cs" />
+    <Compile Include="DAL\FelhasznalokContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -160,7 +160,6 @@
     <Compile Include="Models\Felhasznalok.cs">
       <DependentUpon>VPBuszModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Utvonalak.cs">
       <DependentUpon>VPBuszModel.tt</DependentUpon>
     </Compile>
