@@ -1,0 +1,39 @@
+<section ng-controller="AdminStopController">
+
+  <div class="page-header">
+    <h1>
+      <i class="md md-place"></i>
+      Megállók
+    </h1>
+    <p class="lead">
+      Megállók szerkesztése
+    </p>
+  </div>
+  <div class="row m-b-40">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="input-group" style="padding:20px 0 20px 0">
+          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+          <input type="text" class="form-control" placeholder="Keresés" aria-describedby="basic-addon1" ng-model="searchText">
+        </div>
+
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="stop in stopList | filter:{name: searchText} | orderBy:'name'">
+            <div class="list-actions">
+              <a href="" class="btn btn-link" data-toggle="dropdown"><i class="md md-edit"></i></a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li><a href="" ng-click="editItem(stop)"><i class="md md-edit"></i> Szerkesztés</a></li>
+                <li><a href="" ng-click="removeItem(stop)"><i class="md md-delete"></i> Törlés</a></li>
+              </ul>
+            </div>
+
+            <i class="md md-place"></i> {{stop.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-buttons">
+    <div class="btn btn-primary btn-round btn-lg ng-scope" ng-click="editItem()" data-title="Új megálló" bs-tooltip=""><i class="md md-add"></i></div>
+  </div>
+</section>

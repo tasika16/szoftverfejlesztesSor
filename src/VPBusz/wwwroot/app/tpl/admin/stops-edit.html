@@ -1,0 +1,45 @@
+<div class="aside bs-docs-aside" tabindex="-1" role="dialog">
+  <div class="close">
+    <div class="btn btn-round btn-info" ng-click="$hide()"><i class="md md-close"></i></div>
+  </div>
+
+  <div class="aside-dialog">
+    <div class="aside-body bs-sidebar">
+
+      <form class="form-floating" ng-submit="saveItem(editedItem)">
+        <fieldset>
+          <div class="page-header">
+            <h1 ng-show="!editedItem.id">Új megálló felvitele</h1>
+            <h1 ng-show="editedItem.id">Megálló módosítása</h1>
+          </div>
+
+          <div class="form-group filled">
+            <label class="control-label">Megnevezés</label>
+            <input type="text" class="form-control" ng-model="editedItem.name" required>
+          </div>
+
+          <div class="form-group filled">
+            <label class="control-label">GPS szé.</label>
+            <input type="text" class="form-control" ng-model="editedItem.gps_lat">
+          </div>
+
+          <div class="form-group filled">
+            <label class="control-label">GPS hossz.</label>
+            <input type="text" class="form-control" ng-model="editedItem.gps_long">
+          </div>
+
+          <div ng-if="showmap">
+          <ng-map id="stopMap" center="47.0923658, 17.9123803" zoom="14" style="width:100%;height:300px;" on-click="placeMarker()">
+            <marker position="[{{editedItem.gps_lat}},{{editedItem.gps_long}}]" title="{{editedItem.name}}"></marker>
+          </ng-map>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-primary">Mentés</button>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
