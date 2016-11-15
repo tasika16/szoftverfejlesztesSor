@@ -41,7 +41,7 @@ app.controller('AdminStopController', function($location, $timeout, $scope, $roo
 
     var formTpl = $aside({
         scope: $scope,
-        template: '/public/app/tpl/admin/stops-edit.html',
+        template: '/app/tpl/admin/stops-edit.html',
         show: false,
         placement: 'left',
         backdrop: false,

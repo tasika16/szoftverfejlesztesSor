@@ -8,7 +8,7 @@ app.directive('menuLink', function() {
       icon: '@',
       name: '@'
     },
-    templateUrl: '/public/app/tpl/directives/menu-link.html',
+    templateUrl: '/app/tpl/directives/menu-link.html',
     controller: ['$element', '$location', '$rootScope', function($element, $location, $rootScope) {
       this.getName = function(name) {
         if ( name !== undefined ) {

@@ -40,7 +40,7 @@ app.controller('AdminUserController', function($location, $scope, $rootScope, $h
 
     var formTpl = $aside({
         scope: $scope,
-        template: '/public/app/tpl/admin/users-edit.html',
+        template: '/app/tpl/admin/users-edit.html',
         show: false,
         placement: 'left',
         backdrop: false,

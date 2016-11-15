@@ -1,7 +1,7 @@
 app.directive('navbarSearch', ['$timeout', function($timeout) {
   return {
     restrict: 'A',
-    templateUrl: '/public/app/tpl/directives/navbar-search.html',
+    templateUrl: '/app/tpl/directives/navbar-search.html',
     link: function(scope, element, attrs) {
       scope.showNavbarSearch = false;
 

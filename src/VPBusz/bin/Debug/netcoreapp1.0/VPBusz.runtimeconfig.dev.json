@@ -1,7 +1,7 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/home/tasika16/.nuget/packages"
+      "C:\\Users\\Doink\\.nuget\\packages"
     ]
   }
 }

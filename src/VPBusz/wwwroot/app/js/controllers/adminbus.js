@@ -40,7 +40,7 @@ app.controller('AdminBusController', function($location, $scope, $rootScope, $ht
 
     var formTpl = $aside({
         scope: $scope,
-        template: '/public/app/tpl/admin/buses-edit.html',
+        template: '/app/tpl/admin/buses-edit.html',
         show: false,
         placement: 'left',
         backdrop: false,
