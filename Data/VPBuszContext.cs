@@ -20,12 +20,12 @@ namespace VPBusz.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Route>()
+            /*modelBuilder.Entity<Route>()
                 .HasMany(u=>u.Stops)
                 .WithMany()
                 .Map(x=>x.MapLeftKey("RouteID")
                     .MapRightKey("StopID")
-                    .ToTable("RoutesStops"));   
+                    .ToTable("RoutesStops"));  */ 
         }
     }
 }
