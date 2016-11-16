@@ -10,7 +10,7 @@ namespace VPBusz.Models
     [Table ("Users")]
     public class User
     {
-        public int userID { get; set; }
+        public int UserID { get; set; }
         [Required]
         [StringLength(50)]
         public string email { get; set; }

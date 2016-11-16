@@ -9,9 +9,10 @@ namespace VPBusz.Models
     [Table ("Routes")]
     public class Route
     {
+        public int RouteID { get; set; }
         public List<Bus> Buses { get; set; }
 
-        public List<Stop> Stops { get; set; }
+        public virtual List<Stop> Stops { get; set; }
 
         public int stopIDX { get; set; }
 

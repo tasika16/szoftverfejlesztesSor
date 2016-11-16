@@ -10,7 +10,7 @@ namespace VPBusz.Models
     [Table ("Stops")]
     public class Stop
     {
-        public int stopID { get; set; }
+        public int StopID { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -24,7 +24,7 @@ namespace VPBusz.Models
         [StringLength(60)]
         public string gpsLong { get; set; }
 
-        public List<Route> Routes { get; set; }
+        public virtual List<Route> Routes { get; set; }
 
     }
 }

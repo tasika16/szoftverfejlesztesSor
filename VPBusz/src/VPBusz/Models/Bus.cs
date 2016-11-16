@@ -10,7 +10,7 @@ namespace VPBusz.Models
     [Table ("Buses")]
     public class Bus
     {
-        public int busID { get; set; }
+        public int BusID { get; set; }
 
         [Required]
         [StringLength(50)]
