@@ -14,7 +14,7 @@ namespace VPBusz.Models
         public int UserID { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(254)]
         public string email { get; set; }
 
         [Required]

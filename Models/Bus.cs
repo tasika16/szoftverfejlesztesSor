@@ -18,12 +18,10 @@ namespace VPBusz.Models
         public string lineNumber { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string gpsLat { get; set; }
+        public float gpsLat { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string gpsLong { get; set; }
+        public float gpsLong { get; set; }
 
         [ForeignKey("Buses")]
         public Route Route { get; set; }
