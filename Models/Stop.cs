@@ -18,14 +18,12 @@ namespace VPBusz.Models
         public string name { get; set; }
 
         [Required]
-        [StringLength(60)]
-        public string gpsLat { get; set; }
+        public float gpsLat { get; set; }
 
         [Required]
-        [StringLength(60)]
-        public string gpsLong { get; set; }
-
-        public virtual List<Route> Routes { get; set; }
+        public float gpsLong { get; set; }
+        [ForeignKey ("Routes")]
+        public Route Route { get; set; }
 
     }
 }
