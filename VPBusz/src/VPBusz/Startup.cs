@@ -41,7 +41,7 @@ namespace VPBusz
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            DBInitalizer.Initalize(context);
+            //DBInitalizer.Initalize(context);
         }
     }
 }

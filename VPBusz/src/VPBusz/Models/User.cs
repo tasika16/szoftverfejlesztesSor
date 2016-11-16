@@ -10,7 +10,9 @@ namespace VPBusz.Models
     [Table ("Users")]
     public class User
     {
+        [Key]
         public int UserID { get; set; }
+
         [Required]
         [StringLength(50)]
         public string email { get; set; }

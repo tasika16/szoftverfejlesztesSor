@@ -10,6 +10,7 @@ namespace VPBusz.Models
     [Table ("Stops")]
     public class Stop
     {
+        [Key]
         public int StopID { get; set; }
 
         [Required]

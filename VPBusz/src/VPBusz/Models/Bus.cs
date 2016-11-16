@@ -10,6 +10,7 @@ namespace VPBusz.Models
     [Table ("Buses")]
     public class Bus
     {
+        [Key]
         public int BusID { get; set; }
 
         [Required]
@@ -23,5 +24,8 @@ namespace VPBusz.Models
         [Required]
         [StringLength(50)]
         public string gpsLong { get; set; }
+
+        [ForeignKey("Buses")]
+        public Route Route { get; set; }
     }
 }
