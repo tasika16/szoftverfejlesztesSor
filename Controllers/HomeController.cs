@@ -10,6 +10,13 @@ namespace VPBusz.Controllers
 {
     public class HomeController : Controller
     {
+        private Data.VPBuszContext _context;
+
+        public HomeController(Data.VPBuszContext context)
+        {
+            _context = context;
+        }
+
         [Route("")]
         public IActionResult Index()
         {
