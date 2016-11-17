@@ -31,8 +31,6 @@ namespace VPBusz
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            /*services.AddDbContext<VPBuszContext>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnecntion")));*/
             services.AddMvc();
             services.AddDbContext<VPBuszContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -40,7 +38,7 @@ namespace VPBusz
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
-            ILoggerFactory loggerFactory/*, VPBuszContext context*/)
+            ILoggerFactory loggerFactory, VPBuszContext context)
         {
             loggerFactory.AddConsole();
 
@@ -56,7 +54,7 @@ namespace VPBusz
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            //DBInitalizer.Initalize(context);
+            Seed.SeedBus.Initialize(app.ApplicationServices);
         }
     }
 }
