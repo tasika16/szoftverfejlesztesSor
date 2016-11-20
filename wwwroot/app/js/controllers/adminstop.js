@@ -12,8 +12,8 @@ app.controller('AdminStopController', function($location, $timeout, $scope, $roo
     $scope.getStopList();
 
     $scope.removeItem = function(item){
-        $scope.stopList = _.reject($scope.stopList, function(curr){ return item.id === curr.id });
-        $http.post("/Stop/Remove/"+item.id, {id: item.id}).then(function(result){
+        $scope.stopList = _.reject($scope.stopList, function (curr) { return item.stopID === curr.stopID });
+        $http.post("/Stop/Remove/" + item.stopID, { id: item.stopID }).then(function (result) {
             
         }, function(result){
             $scope.error = result.data.error;
@@ -72,7 +72,7 @@ app.controller('AdminStopController', function($location, $timeout, $scope, $roo
       vm.map = map;
     });
     $scope.placeMarker = function(e) {
-      $scope.editedItem.gps_lat = e.latLng.lat();
-      $scope.editedItem.gps_long = e.latLng.lng();
+      $scope.editedItem.gpsLat = e.latLng.lat();
+      $scope.editedItem.gpsLong = e.latLng.lng();
     }
 });

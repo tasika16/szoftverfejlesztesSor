@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
@@ -23,9 +23,10 @@
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
     "Microsoft.EntityFrameworkCore.Tools": {
-      "version": "1.0.0-preview2-final",
-      "type": "build"
-    } 
+        "version": "1.0.0-preview2-final",
+        "type": "build"
+    },
+    "BCrypt.Net-Core": "1.1.0" 
   },
 
   "tools": {

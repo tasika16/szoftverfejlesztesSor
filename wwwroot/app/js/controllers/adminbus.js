@@ -11,8 +11,8 @@ app.controller('AdminBusController', function($location, $scope, $rootScope, $ht
     $scope.getBusList();
 
     $scope.removeItem = function(item){
-        $scope.busList = _.reject($scope.busList, function(curr){ return item.id === curr.id });
-        $http.post("/Bus/Remove/"+item.id, {id: item.id}).then(function(result){
+        $scope.busList = _.reject($scope.busList, function(curr){ return item.busID === curr.busID });
+        $http.post("/Bus/Remove/" + item.busID, { id: item.busID }).then(function (result) {
             
         }, function(result){
             $scope.error = result.data.error;

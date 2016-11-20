@@ -20,12 +20,15 @@ namespace VPBusz.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /*modelBuilder.Entity<Route>()
-                .HasMany(u=>u.Stops)
-                .WithMany()
-                .Map(x=>x.MapLeftKey("RouteID")
-                    .MapRightKey("StopID")
-                    .ToTable("RoutesStops"));  */ 
+            //one-to-many Bus->Route
+            modelBuilder.Entity<Route>().HasOne(r => r.bus)
+                        .WithMany(b => b.routes)
+                        .HasForeignKey(r => r.BusRefId);
+
+            //one-to-many Stop->Route
+            modelBuilder.Entity<Route>().HasOne(r => r.stop)
+                        .WithMany(s => s.routes)
+                        .HasForeignKey(r => r.StopRefId);
         }
     }
 }

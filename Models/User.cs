@@ -18,7 +18,7 @@ namespace VPBusz.Models
         public string email { get; set; }
 
         [Required]
-        [StringLength(30)]
+        [StringLength(60)]
         public string password { get; set; }
     }
 }

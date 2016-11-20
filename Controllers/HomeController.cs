@@ -8,14 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VPBusz.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private Data.VPBuszContext _context;
-
-        public HomeController(Data.VPBuszContext context)
-        {
-            _context = context;
-        }
+        public HomeController(Data.VPBuszContext context) : base(context) { }
 
         [Route("")]
         public IActionResult Index()
@@ -34,14 +29,14 @@ namespace VPBusz.Controllers
          * url: /Index/Login
          */
         [HttpPost]
-        public ActionResult Login(UserLogin user)
+        public ActionResult Login(UserLogin userLogin)
         {
-            /* TODO: implement this
-            if (user exitst) {
-                return Json(database_user);
-            } else {*/
-            Response.StatusCode = 400;
-            return Json(new { error = "Rossz user vagy pass!" });
+            var dbuser = _context.Users.Where(u => u.email == userLogin.email).Single();
+            if (dbuser == null || !BCrypt.Net.BCrypt.Verify(userLogin.password, dbuser.password)) {
+                Response.StatusCode = 400;
+                return Json(new { error = "Rossz user vagy pass!" });
+            }
+            return Json(dbuser);
         }
     }
 }

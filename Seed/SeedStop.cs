@@ -6,34 +6,28 @@ using VPBusz.Data;
 
 namespace VPBusz.Seed
 {
-    public class SeedBus
+    public class SeedStop
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new Data.VPBuszContext(
                 serviceProvider.GetService<DbContextOptions<VPBuszContext>>()))
             {
-                // Look for any movies.
-                if (context.Buses.Any())
+                if (context.Stops.Any())
                 {
                     return;   // DB has been seeded
                 }
-
-                context.Buses.AddRange(
-                     new Models.Bus
+                
+                context.Stops.Add(
+                     new Models.Stop
                      {
-                         lineNumber = "30y",
-                         gpsLat = 1,
-                         gpsLong = 2.4f
-                     },
-                     new Models.Bus
-                     {
-                         lineNumber = "40y",
-                         gpsLat = 2,
-                         gpsLong = 4.4f
+                         name = "Jutasi út",
+                         gpsLat = 0,
+                         gpsLong = 0
                      }
                 );
                 context.SaveChanges();
+                
             }
         }
     }

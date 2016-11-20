@@ -11,8 +11,8 @@ app.controller('AdminUserController', function($location, $scope, $rootScope, $h
     $scope.getUserList();
 
     $scope.removeItem = function(item){
-        $scope.userList = _.reject($scope.userList, function(curr){ return item.id === curr.id });
-        $http.post("/User/Remove/"+item.id, {id: item.id}).then(function(result){
+        $scope.userList = _.reject($scope.userList, function (curr) { return item.userID === curr.userID });
+        $http.post("/User/Remove/" + item.userID, { id: item.userID }).then(function (result) {
             
         }, function(result){
             $scope.error = result.data.error;

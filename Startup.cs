@@ -55,6 +55,9 @@ namespace VPBusz
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             Seed.SeedBus.Initialize(app.ApplicationServices);
+            Seed.SeedStop.Initialize(app.ApplicationServices);
+            Seed.SeedUser.Initialize(app.ApplicationServices);
+            Seed.SeedRoute.Initialize(app.ApplicationServices);
         }
     }
 }

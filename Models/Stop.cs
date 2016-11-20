@@ -22,8 +22,12 @@ namespace VPBusz.Models
 
         [Required]
         public float gpsLong { get; set; }
-        [ForeignKey ("Routes")]
-        public Route Route { get; set; }
 
+        public virtual List<Route> routes { get; set; }
+
+        public Stop()
+        {
+            routes = new List<Route>();
+        }
     }
 }

@@ -18,7 +18,7 @@
               	</div>
 
 				<ul class="list-group">
-					<li class="list-group-item" ng-repeat="bus in busList | filter:{name: searchText} | orderBy:'name'">
+					<li class="list-group-item" ng-repeat="bus in busList | filter:{'lineNumber': searchText} | orderBy:'lineNumber'">
 						<div class="list-actions">
 						<a href="" class="btn btn-link" data-toggle="dropdown"><i class="md md-edit"></i></a>
 						<ul class="dropdown-menu dropdown-menu-right">
@@ -28,7 +28,7 @@
 						</div>
 
 
-						<i class="md md-directions-bus"></i> {{bus.name}}
+						<i class="md md-directions-bus"></i> {{bus.lineNumber}}
 					</li>
 				</ul>
 			</div>

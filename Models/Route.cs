@@ -13,14 +13,17 @@ namespace VPBusz.Models
         [Key]
         public int RouteID { get; set; }
 
-        public List<Bus> Buses { get; set; }
+        public int BusRefId { get; set; }
+        [ForeignKey("BusRefId")]
+        public virtual Bus bus { get; set; }
 
-        public virtual List<Stop> Stops { get; set; }
+        public int StopRefId { get; set; }
+        [ForeignKey("StopRefId")]
+        public virtual Stop stop { get; set; }
 
         public int stopIDX { get; set; }
-
         public int travelTime { get; set; }
-        public byte workdaysOnly { get; set; }
-        public byte schooldaysOnly { get; set; }    
+        public bool workdaysOnly { get; set; }
+        public bool schooldaysOnly { get; set; }    
     }
 }
