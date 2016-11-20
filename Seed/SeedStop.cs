@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using VPBusz.Data;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace VPBusz.Seed
 {
@@ -17,17 +20,23 @@ namespace VPBusz.Seed
                 {
                     return;   // DB has been seeded
                 }
-                
-                context.Stops.Add(
-                     new Models.Stop
-                     {
-                         name = "Jutasi út",
-                         gpsLat = 0,
-                         gpsLong = 0
-                     }
-                );
+                using (StreamReader file = File.OpenText(System.IO.Directory.GetCurrentDirectory() + "\\Seed\\stops.json"))
+                using (JsonTextReader reader = new JsonTextReader(file))
+                {
+                    JArray arr = (JArray)JToken.ReadFrom(reader);
+                    foreach (JObject item in arr) {
+                        context.Stops.Add(
+                             new Models.Stop
+                             {
+                                 name = item.Value<String>("name"),
+                                 gpsLat = item.Value<float>("gpsLat"),
+                                 gpsLong = item.Value<float>("gpsLong"),
+                                 ExternalID = item.Value<int>("ext_id")
+                             }
+                        );
+                    }
+                }
                 context.SaveChanges();
-                
             }
         }
     }

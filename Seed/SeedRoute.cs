@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using VPBusz.Data;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace VPBusz.Seed
 {
@@ -17,17 +20,31 @@ namespace VPBusz.Seed
                 {
                     return;   // DB has been seeded
                 }
-                /*
-                context.Routes.AddRange(
-                     new Models.Route
-                     {
-                         travelTime = 2,
-                         workdaysOnly = true,
-                         schooldaysOnly = false
-                     }
-                );
+                
+                using (StreamReader file = File.OpenText(System.IO.Directory.GetCurrentDirectory() + "\\Seed\\routes.json"))
+                using (JsonTextReader reader = new JsonTextReader(file))
+                {
+                    JArray arr = (JArray)JToken.ReadFrom(reader);
+                    foreach (JObject item in arr)
+                    {
+                        var ctxbus = context.Buses.Where(b => b.lineNumber.Equals(item.Value<int>("lineNumber").ToString())).First();
+                        foreach (JObject route in item.Value<JArray>("routes"))
+                        {
+                            var ctxstop = context.Stops.Where(st => st.ExternalID == route.Value<int>("stopId")).First();
+                            if (ctxstop != null) {
+                                context.Routes.Add(new Models.Route
+                                {
+                                    travelTime = route.Value<int>("travelTime"),
+                                    workdaysOnly = true, //TODO: not implemented
+                                    schooldaysOnly = true, //TODO: not implemented
+                                    stop = ctxstop,
+                                    bus = ctxbus,
+                                });
+                            }
+                        }
+                    }
+                }
                 context.SaveChanges();
-                */
             }
         }
     }

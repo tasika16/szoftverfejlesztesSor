@@ -13,6 +13,8 @@ namespace VPBusz.Models
         [Key]
         public int StopID { get; set; }
 
+        public int ExternalID { get; set; }
+
         [Required]
         [StringLength(50)]
         public string name { get; set; }
