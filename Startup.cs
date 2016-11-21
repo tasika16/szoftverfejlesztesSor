@@ -10,11 +10,16 @@ using Microsoft.Extensions.Logging;
 using VPBusz.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Net.WebSockets;
+using System.Threading;
+using System.Text;
 
 namespace VPBusz
 {
     public class Startup
     {
+        public List<WebSocket> wsClients = new List<WebSocket>();
+
 		public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -48,6 +53,7 @@ namespace VPBusz
             }
 
             app.UseStaticFiles();
+            app.Map("/ws", VPBuszWebsocket.Map);
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

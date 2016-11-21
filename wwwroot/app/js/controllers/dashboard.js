@@ -1,4 +1,4 @@
-app.controller('DashboardController', function ($scope, $rootScope, NgMap, stopService, routeService, busService, _) {
+app.controller('DashboardController', function ($scope, $timeout, $rootScope, NgMap, stopService, routeService, busService, _) {
 	$rootScope.pageTitle = 'Főoldal';
 	$scope.searchText = "";
 
@@ -25,16 +25,25 @@ app.controller('DashboardController', function ($scope, $rootScope, NgMap, stopS
 	    });
 	});;
 
-	$scope.selectStop = function(event, stop) {
-	    stop.selected = true;
-	    $scope.selectedStop = stop;
-	    $scope.searchText = stop.name;
-	}
 
     //MAP
 	var vm = this;
 	NgMap.getMap("mainMap").then(function (map) {
 	    vm.map = map;
 	});
+
+	$scope.selectStop = function(event, stop) {
+	    stop.selected = true;
+	    $scope.selectedStop = stop;
+	    $scope.searchText = stop.name;
+		vm.map.showInfoWindow('infoWindow', this);
+		$timeout(function(){
+			$('.ng-map-info-window > div').last().click(function(){
+				$scope.selectedStop = null;
+				$scope.searchText = '';
+				$scope.$apply();
+			});
+		},500);
+	}
 
 });

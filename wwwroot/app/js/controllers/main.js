@@ -22,4 +22,17 @@ app.controller('MainController', ['$scope', '$animate', 'localStorageService', '
     }
     localStorageService.bind($scope, 'theme');
 
+    webSocket = new WebSocket("ws://localhost:5000/ws");
+    webSocket.onopen = function () {
+        console.log("connected");
+    };
+    webSocket.onmessage = function (event) {
+        console.log(event.data);
+    };
+    webSocket.onerror = function (event) {
+        alert(event.message);
+    };
+    webSocket.onclose = function () {
+         console.log("disconnected");
+    };
 }]);
