@@ -15,14 +15,54 @@
 			</div>
 
 			<div class="p-20 no-p-t">
+                <div class="row gutter-14">
+                    <div class="col-md-12">
+                        <input class="form-control" ng-model="searchText" style="background-color:#fff;padding:0 10px;margin:10px 0px" placeholder="Keresés...">
+                    </div>
+                </div>
 				<div class="row gutter-14">
 					<div class="col-md-12">
-						<ng-map id="mainMap" center="47.0923658, 17.9123803" zoom="14" style="width:100%;height:600px;">
-							<marker ng-repeat="stop in stopList" position="{{stop.gps_lat}},{{stop.gps_long}}" title="{{stop.name}}"></marker>
+						<ng-map id="mainMap" center="47.0923658, 17.9123803" zoom="13" style="width:100%;height:600px;">
+                            <custom-marker ng-repeat="stop in stopList | filter:{name:searchText}" position="{{stop.gpsLat}},{{stop.gpsLong}}" on-click="selectStop(stop)">
+								<div>
+									<h4 ng-show="selectedStop.stopID == stop.stopID">{{stop.name}}</h4>
+									<img src="/app/img/busstop.jpg" alt="" ng-show="!searchText || selectedStop.stopID == stop.stopID" />
+								</div>
+                            </custom-marker>
+                            <marker ng-repeat="bus in busList | filter:{lineNumber:searchText}" position="{{stop.gpsLat}},{{stop.gpsLong}}" on-click="selectBus(bus)">
+                            </marker>
 						</ng-map>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+        <!-- Right side -->
+		<div class="col-lg-3 col-md-12">
+			<div class="p-20">
+				<h4 class="grey-text m-b-30">{{selectedStop.name}}</h4>
+				<div class="card">
+					<div class="p-10 p-l-20 p-r-20 clearfix">
+						<div class="badge pull-right">10</div>
+						<div class="w600 f11 grey-text">Menetrend</div>
+					</div>
+					<div class="table-responsive">
+						<table class="table table-small grey-text">
+							<colgroup>
+								<col width="">
+								<col width="60">
+								<col width="50">
+							</colgroup>
+							<tbody>
+							<tr>
+								<td>08:00</td>
+								<td></td>
+								<td><i class="md md-arrow-drop-up green-text"></i></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
 </div>

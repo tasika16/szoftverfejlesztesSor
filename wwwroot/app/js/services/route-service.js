@@ -4,11 +4,6 @@ app.service('routeService', function($http) {
 			return result.data;
 		}, function(err){
 			console.error(err);
-			return [
-				{id: 1},
-				{id: 2},
-				{id: 3}
-			];
 		});
 	}
 });
