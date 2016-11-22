@@ -28,6 +28,7 @@ namespace VPBusz.Seed
                     foreach (JObject item in arr)
                     {
                         var ctxbus = context.Buses.Where(b => b.lineNumber.Equals(item.Value<int>("lineNumber"))).First();
+                        var idx = 0;
                         foreach (JObject route in item.Value<JArray>("routes"))
                         {
                             var ctxstop = context.Stops.Where(st => st.ExternalID == route.Value<int>("stopId")).First();
@@ -37,7 +38,9 @@ namespace VPBusz.Seed
                                     travelTime = route.Value<int>("travelTime"),
                                     stop = ctxstop,
                                     bus = ctxbus,
+                                    stopIDX = idx
                                 });
+                                idx++;
                             }
                         }
                     }

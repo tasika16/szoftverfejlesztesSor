@@ -1,4 +1,4 @@
-app.controller('DashboardController', function ($scope, $aside, $timeout, $rootScope, NgMap, stopService, routeService, busService, _) {
+app.controller('DashboardController', function ($scope, $aside, $timeout, $http, $rootScope, NgMap, stopService, routeService, busService, _) {
 	$rootScope.pageTitle = 'Főoldal';
 	$scope.searchText = "";
 
@@ -59,18 +59,27 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $rootS
 		},500);
 	}
 
-	$scope.drawPath = [[0,0],[47.0933533,17.9245453]];
+	$scope.drawPath = [[0,0],[0,0]];
 	$scope.selectBus = function(event, bus) {
 		$scope.selectedBus = bus;
 		console.log($scope.selectedBus);
 		$scope.selectedBus.routes = angular.copy(bus.routes);
-		$scope.selectedBusRoutes = $scope.selectedBus.routes;
 
-		$scope.drawPath = [];
+		routeService.closestStop(bus);
+
+		var pathString = '';
 		_.each($scope.selectedBus.routes, function(r){
-			$scope.drawPath.push([r.stop.gpsLat, r.stop.gpsLong]);
+			pathString+= "|"+r.stop.gpsLat +","+ r.stop.gpsLong;
 		});
-		console.log($scope.drawPath);
+		pathString = pathString.substring(1);
+
+		routeService.snapToRoads(pathString).then(function(result){
+			$scope.drawPath = [];
+			_.each(result.data.snappedPoints, function(point) {
+				$scope.drawPath.push([point.location.latitude, point.location.longitude]);
+			});
+			console.log($scope.drawPath);
+		});
 		showForm();
 		vm.map.showInfoWindow('busWindow', this);
 	}
