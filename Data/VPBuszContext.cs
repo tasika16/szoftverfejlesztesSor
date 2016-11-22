@@ -17,6 +17,7 @@ namespace VPBusz.Data
         public DbSet<Route> Routes { get; set; }
         public DbSet<Stop> Stops { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<StartTime> StartTimes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

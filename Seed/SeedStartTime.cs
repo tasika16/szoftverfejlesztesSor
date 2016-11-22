@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace VPBusz.Seed
 {
-    public class SeedBus
+    public class SeedStartTime
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
@@ -17,22 +17,29 @@ namespace VPBusz.Seed
                 serviceProvider.GetService<DbContextOptions<VPBuszContext>>()))
             {
                 // Look for any movies.
-                if (context.Buses.Any())
+                if (context.StartTimes.Any())
                 {
                     return;   // DB has been seeded
                 }
-                using (StreamReader file = File.OpenText(System.IO.Directory.GetCurrentDirectory() + "\\Seed\\routes.json"))
+                using (StreamReader file = File.OpenText(System.IO.Directory.GetCurrentDirectory() + "\\Seed\\times.json"))
                 using (JsonTextReader reader = new JsonTextReader(file))
                 {
                     JArray arr = (JArray)JToken.ReadFrom(reader);
                     foreach (JObject item in arr)
                     {
-                        context.Buses.Add(
-                            new Models.Bus
+                        var ln = item.Value<int>("lineNumber");
+                        foreach (JObject start in item.Value<JArray>("starts"))
+                        {
+                            context.StartTimes.Add(new Models.StartTime
                             {
-                                lineNumber = item.Value<int>("lineNumber"),
-                            }
-                        );
+                                lineNumber = ln,
+                                hour = start.Value<int>("h"),
+                                min = start.Value<int>("m")
+                                /* TODO
+                                workdaysOnly
+                                schooldaysOnly;*/
+                            });
+                        }
                     }
                 }
                 context.SaveChanges();

@@ -22,20 +22,15 @@ namespace VPBusz.Data
             clients.Add(cl);
         }
 
-        async Task Read()
+        public static void Read()
         {
             while (true)
             {
                 foreach (var socket in clients)
                 {
                     if (socket.State != WebSocketState.Open) {
+                        socket.CloseAsync(WebSocketCloseStatus.Empty,"socket is closed", new CancellationToken());
                         clients.Remove(socket);
-                    }
-                    while (socket.State == WebSocketState.Open)
-                    {
-                        var buffer = new byte[BufferSize];
-                        var seg = new ArraySegment<byte>(buffer);
-                        var incoming = await socket.ReceiveAsync(seg, CancellationToken.None);
                     }
                 }
                 Thread.Sleep(2000);
@@ -57,6 +52,7 @@ namespace VPBusz.Data
         {
             if (!hc.WebSockets.IsWebSocketRequest) { return; }
             VPBuszWebsocket.AddClient(await hc.WebSockets.AcceptWebSocketAsync());
+            VPBuszWebsocket.Read();
         }
         public static void Map(IApplicationBuilder app)
         {

@@ -1,6 +1,6 @@
 <div class="dashboard grey lighten-3" ng-controller="DashboardController">
 	<div class="row no-gutter">
-		<div class="col-sm-12 col-md-12 col-lg-9" style="background:#F9F9F9;">
+		<div class="col-sm-12 col-md-12 col-lg-12" style="background:#F9F9F9;">
 			<div class="p-20 clearfix">
 				<div class="pull-right">
 					<a href="" target="_blank" class="btn btn-round-sm btn-link" bs-tooltip title="GPS"><i class="md md-games"></i></a>
@@ -20,13 +20,21 @@
 				<div class="row gutter-14">
 					<div class="col-md-12">
 						<ng-map id="mainMap" center="47.0923658, 17.9123803" zoom="13" style="width:100%;height:600px;">
+                            <marker class="busmarker" icon="/app/img/bus-marker.png" ng-repeat="bus in busList" position="{{bus.gpsLat}},{{bus.gpsLong}}" on-click="selectBus(bus)">
+                            </marker>
+
                             <custom-marker class="stopmarker" ng-repeat="stop in stopList | filter:{name:searchText}" position="{{stop.gpsLat}},{{stop.gpsLong}}" on-click="selectStop(stop)">
 								<img src="/app/img/busstop.jpg" alt="" ng-hide="selectedStop.stopID == stop.stopID" />
                             </custom-marker>
-                            <marker class="busmarker" ng-repeat="bus in busList | filter:{lineNumber:searchText}" position="{{stop.gpsLat}},{{stop.gpsLong}}" on-click="selectBus(bus)">
-                            </marker>
+							
+							<shape name="polyline" id="foo"
+								path="{{drawPath}}"
+								stroke-color="#FF0000"
+								stroke-opacity="0.6"
+								stroke-weight="3">
+							</shape>
 
-							<info-window id="infoWindow" position="{{selectedStop.gpsLat}},{{selectedStop.gpsLong}}" on-close="alert(123)">
+							<info-window id="infoWindow" position="{{selectedStop.gpsLat}},{{selectedStop.gpsLong}}">
 								<div>
 									<div style="width:24px;float:left;">
 										<img src="/app/img/busstop.jpg" alt="">
@@ -36,35 +44,23 @@
 									</div>
 								</div>
 							</info-window>
+
+							<info-window id="busWindow" position="{{selectedBus.gpsLat}},{{selectedBus.gpsLong}}">
+								<div>
+									<div style="width:24px;float:left;">
+										<img src="/app/img/bus-marker.png" alt="">
+									</div>
+									<div style="float:left;">								
+										<h4 style="margin:5px;">{{selectedBus.lineNumber}}. busz</h4>
+										<ul>
+											<li ng-repeat="myRoute in selectedBus.routes">
+												{{myRoute.routeID}}
+											</li>
+										</ul>
+									</div>
+								</div>
+							</info-window>
 						</ng-map>
-					</div>
-				</div>
-			</div>
-		</div>
-        <!-- Right side -->
-		<div class="col-lg-3 col-md-12">
-			<div class="p-20">
-				<h4 class="grey-text m-b-30">{{selectedStop.name}}</h4>
-				<div class="card">
-					<div class="p-10 p-l-20 p-r-20 clearfix">
-						<div class="badge pull-right">10</div>
-						<div class="w600 f11 grey-text">Menetrend</div>
-					</div>
-					<div class="table-responsive">
-						<table class="table table-small grey-text">
-							<colgroup>
-								<col width="">
-								<col width="60">
-								<col width="50">
-							</colgroup>
-							<tbody>
-							<tr>
-								<td>08:00</td>
-								<td></td>
-								<td><i class="md md-arrow-drop-up green-text"></i></td>
-							</tr>
-							</tbody>
-						</table>
 					</div>
 				</div>
 			</div>

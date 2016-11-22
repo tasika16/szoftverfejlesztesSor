@@ -22,8 +22,6 @@ namespace VPBusz.Models
         public virtual Stop stop { get; set; }
 
         public int stopIDX { get; set; }
-        public int travelTime { get; set; }
-        public bool workdaysOnly { get; set; }
-        public bool schooldaysOnly { get; set; }    
+        public int travelTime { get; set; }  
     }
 }

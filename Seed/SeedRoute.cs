@@ -27,7 +27,7 @@ namespace VPBusz.Seed
                     JArray arr = (JArray)JToken.ReadFrom(reader);
                     foreach (JObject item in arr)
                     {
-                        var ctxbus = context.Buses.Where(b => b.lineNumber.Equals(item.Value<int>("lineNumber").ToString())).First();
+                        var ctxbus = context.Buses.Where(b => b.lineNumber.Equals(item.Value<int>("lineNumber"))).First();
                         foreach (JObject route in item.Value<JArray>("routes"))
                         {
                             var ctxstop = context.Stops.Where(st => st.ExternalID == route.Value<int>("stopId")).First();
@@ -35,8 +35,6 @@ namespace VPBusz.Seed
                                 context.Routes.Add(new Models.Route
                                 {
                                     travelTime = route.Value<int>("travelTime"),
-                                    workdaysOnly = true, //TODO: not implemented
-                                    schooldaysOnly = true, //TODO: not implemented
                                     stop = ctxstop,
                                     bus = ctxbus,
                                 });

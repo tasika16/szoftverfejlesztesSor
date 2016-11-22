@@ -13,7 +13,7 @@ namespace VPBusz.Controllers
         [HttpGet]
         public JsonResult List()
         {
-            return Json(_context.Routes.ToList());
+            return Json(_context.Routes.ToList().OrderBy(s => s.RouteID));
         }
 
         [HttpPost]

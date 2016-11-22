@@ -16,6 +16,12 @@ namespace VPBusz.Controllers
             return Json(_context.Buses.ToList());
         }
 
+        [HttpGet]
+        public JsonResult ListStartTimes()
+        {
+            return Json(_context.StartTimes.ToList());
+        }
+
         [HttpPost]
         public void Edit([FromBody]string value)
         {

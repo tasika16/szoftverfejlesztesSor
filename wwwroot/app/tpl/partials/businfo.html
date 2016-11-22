@@ -1,0 +1,16 @@
+<div class="aside bs-docs-aside" tabindex="-1" role="dialog">
+  <div class="close">
+    <div class="btn btn-round btn-info" ng-click="$hide()"><i class="md md-close"></i></div>
+  </div>
+
+  <div class="aside-dialog">
+    <div class="aside-body bs-sidebar">
+        <h4>{{selectedBus.lineNumber}}. busz</h4>
+        <ul>
+            <li ng-repeat="r in selectedBus.routes">
+                {{r.stop.name}}
+            </li>
+        </ul>
+    </div>
+  </div>
+</div>

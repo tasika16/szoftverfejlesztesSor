@@ -7,26 +7,22 @@ using System.Threading.Tasks;
 
 namespace VPBusz.Models
 {
-    [Table ("Buses")]
-    public class Bus
+    [Table("StartTimes")]
+    public class StartTime
     {
         [Key]
-        public int BusID { get; set; }
+        public int StartTimeID { get; set; }
 
         [Required]
         public int lineNumber { get; set; }
 
         [Required]
-        public float gpsLat { get; set; }
+        public int hour { get; set; }
 
         [Required]
-        public float gpsLong { get; set; }
+        public int min { get; set; }
 
-        public virtual List<Route> routes { get; set; }
-
-        public Bus()
-        {
-            routes = new List<Route>();
-        }
+        public bool workdaysOnly { get; set; }
+        public bool schooldaysOnly { get; set; }
     }
 }

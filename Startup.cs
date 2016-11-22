@@ -64,6 +64,7 @@ namespace VPBusz
             Seed.SeedStop.Initialize(app.ApplicationServices);
             Seed.SeedUser.Initialize(app.ApplicationServices);
             Seed.SeedRoute.Initialize(app.ApplicationServices);
+            Seed.SeedStartTime.Initialize(app.ApplicationServices);
         }
     }
 }
