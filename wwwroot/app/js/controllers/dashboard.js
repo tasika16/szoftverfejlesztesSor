@@ -26,12 +26,9 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $http,
 	    _.each($scope.stopList, function (stop) {
 	        stop.routes = [];
 	        stop.routes.push(_.where($scope.routeList, {"stopRefId": stop.stopID}));
-	        if (stop.routes.length > 1) {
-	            console.log(stop.routes);
-	        }
 	    });
 		_.each($scope.busList, function (b) {
-			b.routes = _.where($scope.routeList, {"busRefId": b.lineNumber});
+			b.routes = _.where($scope.routeList, {"busRefId": b.busID});
 			_.each(b.routes, function (r) {
 				r.stop = _.findWhere($scope.stopList, {"stopID": r.stopRefId});
 			});
@@ -78,7 +75,7 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $http,
 			_.each(result.data.snappedPoints, function(point) {
 				$scope.drawPath.push([point.location.latitude, point.location.longitude]);
 			});
-			console.log($scope.drawPath);
+			$scope.warningMessage = result.data.warningMessage;
 		});
 		showForm();
 		vm.map.showInfoWindow('busWindow', this);
