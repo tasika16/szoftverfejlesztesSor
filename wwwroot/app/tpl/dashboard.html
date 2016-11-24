@@ -33,7 +33,7 @@
 								stroke-opacity="0.6"
 								stroke-weight="3">
 							</shape>
-
+							
 							<info-window id="infoWindow" position="{{selectedStop.gpsLat}},{{selectedStop.gpsLong}}">
 								<div>
 									<div style="width:24px;float:left;">
@@ -44,7 +44,7 @@
 									</div>
 								</div>
 							</info-window>
-
+							
 							<info-window id="busWindow" position="{{selectedBus.gpsLat}},{{selectedBus.gpsLong}}">
 								<div>
 									<div style="width:24px;float:left;">
@@ -67,13 +67,13 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12 col-lg-3">
-				<ul>
-					<li ng-repeat="bus in busList | orderBy:'lineNumber'" style="float:left;">
+				<ul style="list-style-type:none;padding:0;">
+					<li ng-repeat="bus in busList | orderBy:'lineNumber'" style="float:left;margin:5px;">
 						<button class="btn btn-primary" ng-click="selectBus(null,bus)">{{bus.lineNumber}}. busz</button>
 					</li>
 				</ul>
 				<div class="clearfix clear"></div>
-				<div class="red error">{{warningMessage}}</div>
+				<!--<div class="cyan">{{warningMessage}}</div>-->
 			</div>
 		</div>
     </div>

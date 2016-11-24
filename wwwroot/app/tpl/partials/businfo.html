@@ -5,10 +5,28 @@
 
   <div class="aside-dialog">
     <div class="aside-body bs-sidebar">
-        <h4>{{selectedBus.lineNumber}}. busz</h4>
-        <ul>
+        <h4>{{selectedBus.lineNumber}}. busz indulási időponjai</h4>
+
+        <p ng-show="selectedBus.starts">
+          <span class="label label-info" style="font-size:1em;"><i class="fa fa-info-circle"></i> Az indulási időpontok a kezdőállomástól értendőek!</span>
+        </p>
+
+        <p ng-show="!selectedBus.starts">
+          <span class="label label-danger" style="font-size:1em;"><i class="fa fa-exclamation-triangle"></i> Ez a busz csak különleges eseményekkor közlekedik!</span>
+        </p>
+
+        <ul style="width:350px;list-style-type:none;padding:0;">
+            <li ng-repeat="s in selectedBus.starts | orderBy:['hour','min']" ng-class="{'cyan': selectedTime.startTimeID == s.startTimeID}" style="padding:5px 15px;float:left;cursor:pointer;" ng-click="selectTime(selectedBus,s)">
+                {{s.hour}}:{{s.min}}
+            </li>
+        </ul>
+        <div class="clearfix clear"></div>
+
+        <h4>Érintett állomások</h4>
+        <ul style="width:350px;list-style-type:none;padding:0;padding-left:15px;">
             <li ng-repeat="r in selectedBus.routes">
-                {{r.stop.name}}
+                {{r.stop.name}} <span class="label label-info" ng-show="!selectedTime && calcTime(selectedBus,r)>0">+{{calcTime(selectedBus,r)}} perc</span>
+                <span class="label label-info" ng-show="selectedTime">{{calcTimeSelected(selectedBus,r,null)}}</span>
             </li>
         </ul>
     </div>

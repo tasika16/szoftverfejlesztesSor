@@ -1,0 +1,23 @@
+<div class="aside bs-docs-aside" tabindex="-1" role="dialog">
+  <div class="close">
+    <div class="btn btn-round btn-info" ng-click="$hide()"><i class="md md-close"></i></div>
+  </div>
+
+  <div class="aside-dialog">
+    <div class="aside-body bs-sidebar">
+        <h4><img src="/app/img/busstop.jpg" alt=""> {{selectedStop.name}}</h4>
+
+        <ul style="width:350px;list-style-type:none;padding:0;">
+            <li class="clear clearfix" ng-repeat="r in selectedStop.routes | orderBy:'bus.lineNumber'" ng-if="calcStopTime(r).length > 0">
+                {{r.bus.lineNumber}}. busz
+                <ul style="list-style-type:none;">
+                    <li ng-repeat="t in calcStopTime(r) | orderBy:'toString()' track by $index" style="padding:5px 15px;float:left;cursor:pointer;">
+                        {{t}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="clearfix clear"></div>
+    </div>
+  </div>
+</div>
