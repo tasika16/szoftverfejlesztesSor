@@ -68,21 +68,21 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $http,
 		$scope.selectedBus = bus;
 		$scope.selectedBus.routes = angular.copy(bus.routes);
 
-		routeService.closestStop(bus);
-
+		$scope.drawPath = angular.copy($scope.selectedBus.path);
+/*
 		var pathString = '';
 		_.each($scope.selectedBus.routes, function(r){
 			pathString+= "|"+r.stop.gpsLat +","+ r.stop.gpsLong;
 		});
 		pathString = pathString.substring(1);
-
+/*
 		routeService.snapToRoads(pathString).then(function(result){
 			$scope.drawPath = [];
 			_.each(result.data.snappedPoints, function(point) {
 				$scope.drawPath.push([point.location.latitude, point.location.longitude]);
 			});
 			$scope.warningMessage = result.data.warningMessage;
-		});
+		});*/
 		showForm(busInfoTpl);
 		vm.map.showInfoWindow('busWindow', this);
 	}

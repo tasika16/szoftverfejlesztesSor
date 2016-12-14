@@ -136,5 +136,18 @@
     <script charset="utf-8" src="/app/js/controllers/adminroute.js"></script>
     <script charset="utf-8" src="/app/js/controllers/adminstop.js"></script>
     <!-- endbuild -->
+    <script>
+        function GMM(data) {
+            var ctl = {}
+            _.each(data, function (item) {
+                if (!ctl[item.lineNumber]) { ctl[item.lineNumber] = []; }
+                var decoded = google.maps.geometry.encoding.decodePath(item.points);
+                _.each(decoded, function(p) {
+                    ctl[item.lineNumber].push([p.lat(), p.lng()]);
+                });
+            });
+            return ctl;
+        }
+    </script>
 </body>
 </html>

@@ -22,6 +22,9 @@ namespace VPBusz.Models
         [Required]
         public float gpsLong { get; set; }
 
+        [Column(TypeName = "ntext")]
+        public string path { get; set; }
+
         public virtual List<Route> routes { get; set; }
 
         public Bus()
