@@ -1,21 +1,19 @@
 <aside class="sidebar fixed">
   <div class="brand-logo">
     <strong>VPBUSZ</strong>
-    <span ng-show="$root.user"><i class="fa fa-user"></i> {{$root.user.email}} belépett!</span>
   </div>
+
+  <p style="text-align:center;" ng-show="$root.user">{{$root.user.email}}</p>
   
   <ul ng-cloak>
-    <a menu-link href="#/dashboard" icon="md md-dashboard">Főoldal</a>
-    <li menu-toggle path="/admin" name="Admin" icon="md md-place" ng-show="$root.user">
-      <a menu-link href="#/admin/stops" icon="md md-people">Felhasználók</a>
-      <a menu-link href="#/admin/stops" icon="md md-traffic">Megállók</a>
-      <a menu-link href="#/admin/buses" icon="md md-directions-bus">Buszok</a>
-      <a menu-link href="#/admin/routes" icon="md md-swap-horiz">Útvonalak</a>
-    </li>
-    <!-- TODO: delete these -->
-    <!--<a menu-link href="#/admin/users" icon="md md-people">Felhasználók</a>-->
-    <a menu-link href="#/admin/stops" icon="md md-traffic">Megállók</a>
-    <a menu-link href="#/admin/buses" icon="md md-directions-bus">Buszok</a>
-    <a menu-link href="#/admin/routes" icon="md md-swap-horiz">Útvonalak</a>
+      <li><a menu-link href="#/dashboard" icon="md md-dashboard">Főoldal</a></li>
+      <li><a menu-link href="#/admin/login" icon="md md-people">Admin</a></li>
+      <li menu-toggle path="/admin" name="Admin" icon="md md-place" ng-show="$root.user">
+          <ul>
+              <li><a menu-link href="#/admin/users" icon="md md-people">Felhasználók</a></li>
+              <li><a menu-link href="#/admin/stops" icon="md md-traffic">Megállók</a></li>
+              <li><a menu-link href="#/admin/buses" icon="md md-directions-bus">Buszok</a></li>
+          </ul>
+      </li>
   </ul>
 </aside>

@@ -227,6 +227,7 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $http,
         hideForm(stopInfoTpl);
         hideForm(searchInfoTpl);
         webSocket.close();
+        $timeout.cancel(wstimeout);
     });
 
 
@@ -252,13 +253,14 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $http,
     webSocket.onclose = function () {
         console.log("WS disconnected");
     };
+
     var poll = function () {
         $http.get("http://" + window.location.host + "/Home/Wscheck");
-        $timeout(function () {
+        wstimeout = $timeout(function () {
             poll();
         }, 3000);
     }
-    $timeout(function () {
+    var wstimeout = $timeout(function () {
         poll();
     }, 5000);
 });

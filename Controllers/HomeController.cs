@@ -23,8 +23,8 @@ namespace VPBusz.Controllers
 
         public class UserLogin
         {
-            public string email;
-            public string password;
+            public string email { get; set; }
+            public string password { get; set; }
         }
 
         /* 
@@ -32,9 +32,9 @@ namespace VPBusz.Controllers
          * url: /Index/Login
          */
         [HttpPost]
-        public ActionResult Login(UserLogin userLogin)
+        public ActionResult Login([FromBody] UserLogin userLogin)
         {
-            var dbuser = _context.Users.Where(u => u.email == userLogin.email).Single();
+            var dbuser = _context.Users.Where(u => u.email.Equals(userLogin.email)).Single();
             if (dbuser == null || !BCrypt.Net.BCrypt.Verify(userLogin.password, dbuser.password))
             {
                 Response.StatusCode = 400;

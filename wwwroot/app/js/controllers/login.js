@@ -6,7 +6,7 @@ app.controller('LoginController', function($window, $location, $scope, $rootScop
 
     $scope.auth = function(){
         $scope.error = null;
-        $http.post("/Index/Login", {email: $scope.email, password: $scope.password}).then(function(result){
+        $http.post("/Home/Login", {email: $scope.email, password: $scope.password}).then(function(result){
             $rootScope.user = result.data;
             $location.path("/admin/stops");
         }, function(result){
