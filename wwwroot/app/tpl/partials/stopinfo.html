@@ -5,7 +5,7 @@
 
   <div class="aside-dialog">
     <div class="aside-body bs-sidebar">
-        <h4><img src="/app/img/busstop.jpg" alt=""> {{selectedStop.name}}</h4>
+        <h4><img src="/app/img/busstop.png" alt=""> {{selectedStop.name}}</h4>
 
         <ul style="width:350px;list-style-type:none;padding:0;">
             <li class="clear clearfix" ng-repeat="r in selectedStop.routes | orderBy:'bus.lineNumber'" ng-if="calcStopTime(r).length > 0">

@@ -1,10 +1,59 @@
 app.controller('DashboardController', function ($scope, $aside, $timeout, $http, $rootScope, NgMap, stopService, routeService, busService, _) {
 	$rootScope.pageTitle = 'Főoldal';
-	$scope.searchText = "";
+
+	$scope.selectedOrig = null;
+	$scope.selectedDest = null;
 
 	$scope.busList = [];
 	$scope.stopList = [];
 	$scope.routeList = [];
+
+	$scope.isShowStop = function (e) {
+	    if (!$scope.selectedOrig && !$scope.selectedDest) {
+	        return true;
+	    }
+	    if ($scope.selectedOrig && e.stopID == $scope.selectedOrig.originalObject.stopID) {
+	        return true;
+	    }
+	    if ($scope.selectedDest && e.stopID == $scope.selectedDest.originalObject.stopID) {
+	        return true;
+	    }
+	    return false;
+	}
+
+	$scope.$watch('selectedOrig', function(n, o) {
+        if (n !== o) $scope.onSearchChange();
+	});
+	$scope.$watch('selectedDest', function(n, o) {
+	    if (n !== o) $scope.onSearchChange();
+	});
+
+	var busContainsStop = function (selectedStop) {
+	    var ret = [];
+	    for (var i = 0; i < $scope.routeList.length; i++) {
+	        var route = $scope.routeList[i];
+	        if (route.stop.stopID == selectedStop.originalObject.stopID) {
+	            ret.push(route.bus.lineNumber);
+	        }
+	    }
+	    return ret;
+	}
+
+	$scope.onSearchChange = function() {
+	    if ($scope.selectedOrig && $scope.selectedDest) {
+
+	        var origRoutes = busContainsStop($scope.selectedOrig);
+	        var destRoutes = busContainsStop($scope.selectedDest);
+
+	        $scope.searchRouteInfo = []; // routes with both stop
+	        _.each(origRoutes, function (line) {
+	            if (destRoutes.indexOf(line) >= 0 && !_.find($scope.searchRouteInfo, function (b) { return b.lineNumber === line; })) {
+	                $scope.searchRouteInfo.push(_.find($scope.busList, function (b) { return b.lineNumber === line; }));
+	            }
+	        });
+	        showForm(searchInfoTpl);
+	    }
+	}
 
 	busService.getList().then(function (result) {
 	    $scope.busList = result;
@@ -49,7 +98,6 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $http,
 
 	$scope.selectStop = function(event, stop) {
 	    $scope.selectedStop = stop;
-	    $scope.searchText = stop.name;
 		vm.map.showInfoWindow('infoWindow', this);
 		
 		showForm(stopInfoTpl);
@@ -57,7 +105,6 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $http,
 		$timeout(function(){
 			$('.ng-map-info-window > div').last().click(function(){
 				$scope.selectedStop = null;
-				$scope.searchText = '';
 				$scope.$apply();
 			});
 		},300);
@@ -83,8 +130,12 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $http,
 			});
 			$scope.warningMessage = result.data.warningMessage;
 		});*/
-		showForm(busInfoTpl);
+		//showForm(busInfoTpl);
 		vm.map.showInfoWindow('busWindow', this);
+	}
+
+	$scope.showBusInfo = function () {
+	    showForm(busInfoTpl);
 	}
 
 	$scope.selectTime = function(bus,time){
@@ -151,7 +202,16 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $http,
         placement: 'left',
         backdrop: false,
         animation: 'am-slide-left'
-    });
+	});
+
+	var searchInfoTpl = $aside({
+	    scope: $scope,
+	    template: '/app/tpl/partials/searchinfo.html',
+	    show: false,
+	    placement: 'left',
+	    backdrop: false,
+	    animation: 'am-slide-left'
+	});
 
     var showForm = function(tpl){
         angular.element('.tooltip').remove();
@@ -165,5 +225,6 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $http,
     $scope.$on('$destroy', function() {
         hideForm(busInfoTpl);
         hideForm(stopInfoTpl);
+        hideForm(searchInfoTpl);
     });
 });

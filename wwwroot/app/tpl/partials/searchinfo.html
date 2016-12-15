@@ -1,0 +1,25 @@
+﻿<div class="aside bs-docs-aside" tabindex="-1" role="dialog">
+    <div class="close">
+        <div class="btn btn-round btn-info" ng-click="$hide()"><i class="md md-close"></i></div>
+    </div>
+
+    <div class="aside-dialog">
+        <div class="aside-body bs-sidebar">
+            <h4><img src="/app/img/busstop.png" alt=""> {{selectedOrig.title}} <i class="fa fa-long-arrow-right" aria-hidden="true"></i> <img src="/app/img/busstop.png" alt=""> {{selectedDest.title}}</h4>
+
+            <ul style="width:350px;list-style-type:none;padding:0;">
+                <li class="clear clearfix" ng-repeat="bus in searchRouteInfo | orderBy:'lineNumber' track by $index">
+                    {{bus.lineNumber}}. busz <button class="btn btn-primary" ng-click="selectBus(null,bus)">Térképre</button>
+
+                    <div class="clearfix clear"></div>
+                    <ul style="width:350px;list-style-type:none;padding:0;">
+                        <li ng-repeat="s in bus.starts | orderBy:['hour','min'] track by $index" ng-class="{'cyan': selectedTime.startTimeID == s.startTimeID}" style="padding:5px 15px;float:left;cursor:pointer;" ng-click="selectTime(selectedBus,s)">
+                            {{s.hour}}:{{s.min}}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="clearfix clear"></div>
+        </div>
+    </div>
+</div>

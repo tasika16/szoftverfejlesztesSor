@@ -29,7 +29,7 @@
           </div>
 
           <div ng-if="showmap">
-          <ng-map id="stopMap" center="47.0923658, 17.9123803" zoom="14" style="width:100%;height:300px;" on-click="placeMarker()">
+          <ng-map id="stopMap" center="47.0923658, 17.9123803" zoom="12" style="width:100%;height:300px;" on-click="placeMarker()">
             <marker position="[{{editedItem.gpsLat}},{{editedItem.gpsLong}}]" title="{{editedItem.name}}"></marker>
           </ng-map>
           </div>

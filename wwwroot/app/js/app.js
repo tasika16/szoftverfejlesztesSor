@@ -11,7 +11,7 @@ var app = angular.module('materialism', [
   'ngMap',
 
   'angular-loading-bar',
-
+  'angucomplete-alt',
   'ui.select',
 
   'mgcrea.ngStrap',
