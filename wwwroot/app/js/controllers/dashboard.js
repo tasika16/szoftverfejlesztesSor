@@ -226,5 +226,39 @@ app.controller('DashboardController', function ($scope, $aside, $timeout, $http,
         hideForm(busInfoTpl);
         hideForm(stopInfoTpl);
         hideForm(searchInfoTpl);
+        webSocket.close();
     });
+
+
+
+    /* WS */
+    webSocket = new WebSocket("ws://" + window.location.host + "/ws");
+    console.log(window.location.host);
+    webSocket.onopen = function () {
+        console.log("WS connected");
+    };
+    webSocket.onmessage = function (event) {
+        var json = JSON.parse(event.data);
+        _.each(json, function (updateBus) {
+            var bus = _.find($scope.busList, function (b) { return b.lineNumber === updateBus.lineNumber; });
+            bus.gpsLat = updateBus.pos[0];
+            bus.gpsLong = updateBus.pos[1];
+        });
+        $scope.$apply();
+    };
+    webSocket.onerror = function (event) {
+        alert(event.message);
+    };
+    webSocket.onclose = function () {
+        console.log("WS disconnected");
+    };
+    var poll = function () {
+        $http.get("http://" + window.location.host + "/Home/Wscheck");
+        $timeout(function () {
+            poll();
+        }, 3000);
+    }
+    $timeout(function () {
+        poll();
+    }, 5000);
 });

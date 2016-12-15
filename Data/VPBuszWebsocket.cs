@@ -36,15 +36,12 @@ namespace VPBusz.Data
                 Thread.Sleep(2000);
             }
         }
-        public async Task Send(String message)
+        public static async Task Send(String message)
         {
-            var buffer = new byte[BufferSize];
-            var seg = new ArraySegment<byte>(buffer);
-
+            var seg = new ArraySegment<byte>(System.Text.Encoding.UTF8.GetBytes(message), 0,message.Length);
             foreach (var socket in clients)
             {
-                var outgoing = new ArraySegment<byte>(buffer, 0, message.Length);
-                await socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
+                await socket.SendAsync(seg, WebSocketMessageType.Text, true, CancellationToken.None);
             }
         }
 
